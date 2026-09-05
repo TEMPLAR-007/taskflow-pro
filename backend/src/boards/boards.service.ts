@@ -37,8 +37,20 @@ export class BoardsService {
         members: {
           create: { userId: user.id, role: 'OWNER' },
         },
+        columns: {
+          create: [
+            { title: 'TO DO', position: 0 },
+            { title: 'IN PROGRESS', position: 1 },
+            { title: 'DONE', position: 2 },
+          ],
+        },
       },
-      include: { members: true },
+      include: {
+        members: true,
+        columns: {
+          orderBy: { position: 'asc' },
+        },
+      },
     });
     return board;
   }
